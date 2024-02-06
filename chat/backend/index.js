@@ -1,5 +1,12 @@
 const DotEnv = require("dotenv");
 const OpenAI = require("openai");
+const express = require("express");
+
+const app = express();
+
+//CORS 문제 해결
+var cors = require("cors");
+app.use(cors());
 
 DotEnv.config({ path: ".env" });
 
@@ -7,7 +14,10 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-async function main() {
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+app.get("/fortuneChat", async function (req, res) {
   const completion = await openai.chat.completions.create({
     messages: [
       {
@@ -34,7 +44,11 @@ async function main() {
     model: "gpt-3.5-turbo",
   });
 
-  console.log(completion.choices[0]);
-}
+  let fortune = completion.choices[0].message["content"];
 
-main();
+  console.log(fortune);
+
+  res.send(fortune);
+});
+
+app.listen(3000);
