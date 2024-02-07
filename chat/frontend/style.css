@@ -1,0 +1,49 @@
+#chat {
+  height: calc(100vh - 100px - 100px);
+  overflow-y: auto;
+  background-color: #acbfce;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  display: flex;
+  flex-direction: column; /* 채팅이 위에서 아래로 쌓입니다. */
+  align-items: flex-start;
+}
+.message {
+  display: flex;
+  max-width: 80%;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  flex-direction: column;
+}
+.user-message {
+  background-color: #f6e011;
+  align-self: flex-end;
+}
+
+.fortune-message {
+  background-color: #ffffff;
+  align-self: flex-start;
+}
+.fortune-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.message-content {
+  align-self: flex-end;
+}
+.fortune-profile-outer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
