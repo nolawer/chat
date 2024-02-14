@@ -19,9 +19,13 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 app.post("/fortunechat", async function (req, res) {
   // 프런트엔드에서 보낸 메시지 출력
-  let { userMessages, assistantMessages } = req.body;
+  let { myDate, userMessages, assistantMessages } = req.body;
   // console.log("index.js user msg : " + userMessages);
   // console.log("index.js assis msg : " + assistantMessages);
+
+  let todayDate = new Date().toLocaleDateString("ko-KR", {
+    timeZone: "Asia/Seoul",
+  });
 
   let messages = [
     {
@@ -41,7 +45,11 @@ app.post("/fortunechat", async function (req, res) {
     },
     {
       role: "user",
-      content: "오늘의 운세가 어떤가요?",
+      content: `저의 생년월일은 ${myDate} 입니다. 그리고 오늘은 ${todayDate} 입니다.`,
+    },
+    {
+      role: "assistant",
+      content: `당신의 생년월일이 ${myDate}인 것과 오늘이 ${todayDate}인 것을 확인했습니다. 운세에 대해서 어떤 것이든 물어보세요!`,
     },
   ];
 

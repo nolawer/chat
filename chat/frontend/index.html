@@ -12,7 +12,37 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container pt-2 pb-4">
+    <div id="intro_container" class="intro_container my-3">
+      <h2>자네, 운세 한 번 보겠는가?</h2>
+      <img src="./asset/img/intro.jpg" alt="fortune" />
+
+      <div class="container mt-3">
+        <h3 class="text-">생년월일을 입력해주세요.</h3>
+
+        <div class="mb-3">
+          <!-- <label for="birthdate" class="form-label"
+              >생년월일 (YYYYMMDD)</label
+            > -->
+          <input
+            type="tel"
+            class="form-control"
+            id="birthdate"
+            name="birthdate"
+            pattern="\d{8}"
+            inputmode="numeric"
+            placeholder="예: 19900101"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary d-block w-100"
+          onclick="start()"
+        >
+          오늘의 운세 보기
+        </button>
+      </div>
+    </div>
+    <div id="chat_container" class="container pt-2 pb-4" style="display: none">
       <div
         class="text-center mb-2 d-flex align-items-center justify-content-center"
       >
@@ -27,6 +57,17 @@
       <div id="chat" class="mb-3 shadow rounded">
         <!-- 메시지가 표시됩니다 -->
       </div>
+      <div class="d-flex justify-content-center">
+        <div
+          id="loader"
+          class="spinner-border text-primary mb-3"
+          role="status"
+          style="display: none"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
       <div class="input-group mb-3 shadow">
         <input
           type="text"
@@ -36,7 +77,7 @@
           onkeydown="if(event.key === 'Enter') { sendMessage(); }"
         />
         <button class="btn btn-primary" type="button" onclick="sendMessage()">
-          보내기
+          전송
         </button>
       </div>
     </div>

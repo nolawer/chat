@@ -1,15 +1,28 @@
 let userMessages = [];
 let assistantMessages = [];
+let date = "";
+
+function start() {
+  date = document.getElementById("birthdate").value;
+  if (date == "") {
+    alert("생년월일을 입력해주세요.");
+    return;
+  }
+
+  document.getElementById("intro_container").style.display = "none";
+  document.getElementById("chat_container").style.display = "block";
+}
 
 async function fetchFortuneChat(message) {
-  console.log("script user msg : " + userMessages);
-  console.log("script assis msg : " + assistantMessages);
+  // console.log("script user msg : " + userMessages);
+  // console.log("script assis msg : " + assistantMessages);
 
   try {
     const response = await fetch("http://localhost:3000/fortunechat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        myDate: date,
         userMessages: userMessages,
         assistantMessages: assistantMessages,
       }),
@@ -26,6 +39,8 @@ async function fetchFortuneChat(message) {
 }
 
 function sendMessage() {
+  // 로딩 스피너 아이콘 보여주기
+  document.getElementById("loader").style.display = "block";
   // 사용자의 입력 메시지 가져옴
   const input = document.getElementById("messageInput");
   const message = input.value.trim();
@@ -75,6 +90,9 @@ function addMessageToChat(message, type) {
   messageContent.className = "message-content";
   messageContent.textContent = message;
   messageContainer.appendChild(messageContent);
+
+  // 로딩 스피너 아이콘 숨기기
+  document.getElementById("loader").style.display = "none";
 
   // 메시지 컨테이너를 chat 컨테이너에 추가
   chat.appendChild(messageContainer);

@@ -1,3 +1,15 @@
+.intro_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro_container img {
+  width: 50%;
+  min-width: 300px;
+}
+
 #chat {
   height: calc(100vh - 100px - 100px);
   overflow-y: auto;
